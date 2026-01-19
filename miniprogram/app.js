@@ -6,7 +6,7 @@ App({
     }
     // 全局初始化云能力，绑定到你提供的云环境 ID
     wx.cloud.init({
-      env: "cloud1-6gabl16ha21ae673",
+      env: "YOUR_CLOUD_ENV_ID", // 替换为你的云环境ID
       traceUser: true
     });
   },

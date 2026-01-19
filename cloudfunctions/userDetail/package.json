@@ -1,0 +1,9 @@
+{
+  "name": "userDetail",
+  "version": "1.0.0",
+  "description": "获取用户详情（权限控制）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

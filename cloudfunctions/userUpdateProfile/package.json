@@ -1,0 +1,10 @@
+{
+  "name": "userUpdateProfile",
+  "version": "1.0.0",
+  "description": "更新个人资料（仅允许更新自己的 name）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
+

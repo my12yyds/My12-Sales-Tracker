@@ -1,0 +1,62 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #eef2f7;
+}
+
+.stats {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 18rpx;
+}
+
+.stat {
+  flex: 1;
+  background: #f9fafb;
+  border-radius: 16rpx;
+  padding: 18rpx;
+  text-align: center;
+}
+
+.num {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 6rpx;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.label {
+  width: 180rpx;
+  color: #6b7280;
+}
+
+.value {
+  flex: 1;
+  word-break: break-all;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 24rpx;
+  color: #111827;
+}
+
+.name-input {
+  width: 100%;
+  padding: 16rpx 18rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+

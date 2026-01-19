@@ -1,0 +1,6 @@
+<view class="card">
+  <view style="font-weight:600;font-size:34rpx;">登录中…</view>
+  <view class="muted" style="margin-top:16rpx;">首次进入会自动创建账号，请稍等</view>
+</view>
+
+<view class="watermark">my12yyds</view>

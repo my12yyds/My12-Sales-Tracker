@@ -1,0 +1,87 @@
+.form-item {
+  margin-bottom: 32rpx;
+}
+
+.form-item:last-of-type {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16rpx;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 18rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  background: #fff;
+  color: #111827;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 200rpx;
+  box-sizing: border-box;
+  padding: 20rpx 18rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  background: #fff;
+  color: #111827;
+  line-height: 1.6;
+}
+
+.sales-selector {
+  border: 1rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  background: #f9fafb;
+}
+
+.sales-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.sales-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #111827;
+}
+
+.sales-item checkbox {
+  margin-right: 8rpx;
+}
+
+.hint {
+  font-size: 24rpx;
+  color: #6b7280;
+  margin-top: 8rpx;
+}
+
+.btn-success {
+  width: 100%;
+  background: #07c160;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-top: 40rpx;
+}
+
+.btn-success[disabled] {
+  background: #d1d5db;
+  color: #9ca3af;
+}

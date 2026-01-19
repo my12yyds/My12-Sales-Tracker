@@ -1,0 +1,9 @@
+{
+  "name": "leadList",
+  "version": "1.0.0",
+  "description": "获取线索列表（按角色返回不同数据）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

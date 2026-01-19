@@ -1,0 +1,9 @@
+{
+  "name": "followUpCreate",
+  "version": "1.0.0",
+  "description": "创建跟进记录（销售）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

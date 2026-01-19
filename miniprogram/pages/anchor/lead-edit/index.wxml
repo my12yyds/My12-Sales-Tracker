@@ -1,0 +1,33 @@
+<!--主播-录入线索页-->
+<view class="container">
+  <view class="card">
+    <view class="form-item">
+      <text class="label">客户电话 *</text>
+      <input class="input" type="number" placeholder="请输入客户电话" value="{{phone}}" bindinput="onPhoneInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">备注</text>
+      <textarea class="textarea" placeholder="请输入备注信息" value="{{remarks}}" bindinput="onRemarksInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">分配销售</text>
+      <view class="sales-selector">
+        <view class="sales-list">
+          <view class="sales-item" wx:for="{{groupSales}}" wx:key="_id">
+            <checkbox value="{{item._id}}" checked="{{item.checked}}" bindtap="onSalesToggle" data-sales="{{item}}" />
+            <text>{{item.name || '未命名'}}</text>
+          </view>
+        </view>
+        <text class="hint">不选择则自动分配最少负载的销售</text>
+      </view>
+    </view>
+
+    <button class="btn-success" bindtap="onSubmit" disabled="{{submitting}}">
+      {{submitting ? '提交中...' : '提交'}}
+    </button>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

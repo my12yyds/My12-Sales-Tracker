@@ -1,0 +1,46 @@
+<!--用户详情页-->
+<view class="container">
+  <view class="card" wx:if="{{user}}">
+    <view class="user-header">
+      <view class="user-name">{{user.name}}</view>
+      <view class="user-role-tag">{{user.roleText}}</view>
+    </view>
+    
+    <view class="info-section">
+      <view class="info-row">
+        <text class="label">姓名</text>
+        <text class="value">{{user.name}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">角色</text>
+        <text class="value">{{user.roleText}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">小组</text>
+        <text class="value">{{user.groupText}}</text>
+      </view>
+      <view class="info-row" wx:if="{{user.canSeePrivate && user.phone}}">
+        <text class="label">手机号</text>
+        <text class="value">{{user.phone}}</text>
+      </view>
+      <view class="info-row" wx:if="{{user.canSeePrivate && user.wechat}}">
+        <text class="label">微信号</text>
+        <text class="value">{{user.wechat}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">注册时间</text>
+        <text class="value">{{user.createdAtDate || '—'}}</text>
+      </view>
+    </view>
+
+    <view class="actions" wx:if="{{user.role === 1 || user.role === 2}}">
+      <button class="btn-success" bindtap="onFollowUpTap">跟进线索</button>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

@@ -1,0 +1,282 @@
+page {
+  background: #f6f7fb;
+  color: #111827;
+  font-size: 28rpx;
+  line-height: 1.4;
+}
+
+/* ========== Layout ========== */
+.container {
+  padding: 24rpx;
+  min-height: 100vh;
+  background: #f6f7fb;
+}
+
+.section {
+  margin-bottom: 24rpx;
+}
+
+.header {
+  margin-bottom: 24rpx;
+}
+
+/* ========== Typography ========== */
+.title {
+  font-size: 36rpx;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-top: 10rpx;
+  color: #6b7280;
+  font-size: 26rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.06);
+}
+
+.card-tight {
+  padding: 20rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+.small {
+  font-size: 24rpx;
+}
+
+/* ========== Buttons ========== */
+button {
+  border-radius: 12rpx;
+}
+
+.btn-primary {
+  background: #1677ff;
+  color: #fff;
+}
+
+.btn-success {
+  background: #07c160;
+  color: #fff;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-danger-mini {
+  background: #ef4444;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  margin-left: 16rpx;
+}
+
+/* ========== Inputs ========== */
+.input,
+.textarea,
+.picker {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  padding: 16rpx 18rpx;
+  font-size: 28rpx;
+}
+
+.textarea {
+  min-height: 200rpx;
+}
+
+/* ========== Tags ========== */
+.tag {
+  font-size: 24rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 999rpx;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.tag-status {
+  font-size: 24rpx;
+  padding: 8rpx 14rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid #e5e7eb;
+  background: #fff;
+}
+
+.tag-NEW { background: #e6f7ff; color: #1677ff; border-color: rgba(22,119,255,0.25); }
+.tag-CONTACTED { background: #fff7e6; color: #fa8c16; border-color: rgba(250,140,22,0.25); }
+.tag-QUOTED { background: #f6ffed; color: #52c41a; border-color: rgba(82,196,26,0.25); }
+.tag-WON { background: #f6ffed; color: #07c160; border-color: rgba(7,193,96,0.25); }
+.tag-LOST { background: #fff1f0; color: #ef4444; border-color: rgba(239,68,68,0.25); }
+
+/* ========== Modal ========== */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  z-index: 999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 650rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.modal-title {
+  font-weight: 900;
+  font-size: 34rpx;
+  margin-bottom: 18rpx;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+}
+
+/* ========== Lists (Leads / FollowUps) ========== */
+.leads-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.leads-list > view + view {
+  margin-top: 16rpx;
+}
+
+.lead-item-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+
+.lead-item-content {
+  flex: 1;
+}
+
+.lead-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  align-items: flex-end;
+}
+
+.lead-item .phone,
+.lead-item-content .phone {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.lead-info {
+  margin-top: 14rpx;
+}
+
+.info-item {
+  font-size: 26rpx;
+  color: #4b5563;
+  margin-top: 8rpx;
+}
+
+.info-item:first-child {
+  margin-top: 0;
+}
+
+.followups-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.followups-list > view + view {
+  margin-top: 16rpx;
+}
+
+.followup-item {
+  padding: 20rpx;
+  background: #f9fafb;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #07c160;
+}
+
+.followup-remarks {
+  margin-top: 10rpx;
+  color: #111827;
+}
+
+.lead-footer {
+  margin-top: 12rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+  align-items: center;
+}
+
+/* ========== Empty / Loading ========== */
+.empty,
+.loading {
+  text-align: center;
+  padding: 80rpx 0;
+  color: #6b7280;
+}
+
+/* ========== Link Text ========== */
+.link-text {
+  color: #1677ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ========== Watermark ========== */
+.watermark {
+  position: fixed;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ========== Refresh Button ========== */
+.btn-refresh {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1rpx solid #e5e7eb;
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+}
+
+.btn-refresh[loading] {
+  opacity: 0.6;
+}

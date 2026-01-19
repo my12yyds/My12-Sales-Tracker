@@ -1,0 +1,67 @@
+<!--线索详情页（通用）-->
+<view class="container">
+  <view class="card" wx:if="{{lead}}">
+    <view>
+      <view class="info-row">
+        <text class="label">客户电话：</text>
+        <text class="value">{{lead.phone}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">当前状态：</text>
+        <text class="tag-status tag-{{lead.lastStatus}}">{{lead.lastStatusText}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">创建者：</text>
+        <text class="value">{{lead.createdByName || '未知'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">分配销售：</text>
+        <text class="value">{{lead.assignedSalesNames || '未分配'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">创建时间：</text>
+        <text class="value">{{lead.createdAtDate || '—'}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">跟进次数：</text>
+        <text class="value">{{lead.followUpCount || 0}}</text>
+      </view>
+      <view class="info-row" wx:if="{{lead.remarks}}">
+        <text class="label">备注：</text>
+        <text class="value">{{lead.remarks}}</text>
+      </view>
+    </view>
+
+    <view class="actions">
+      <button class="btn-success" wx:if="{{canAddFollowUp}}" bindtap="onAddFollowUp">跟进</button>
+      <button class="btn-danger" wx:if="{{canDelete}}" bindtap="onDeleteLead">删除线索</button>
+    </view>
+
+    <view class="card card-tight" style="margin-top:20rpx;">
+      <text class="section-title">跟进记录</text>
+      <view class="followups-list" wx:if="{{followUps.length > 0}}">
+        <view class="followup-item" wx:for="{{followUps}}" wx:key="_id">
+          <view class="row-between">
+            <text class="sales-name link-text" wx:if="{{item.salesId}}" data-id="{{item.salesId}}" bindtap="goUserDetail">{{item.salesName}}</text>
+            <text class="sales-name" wx:else>{{item.salesName}}</text>
+            <text class="tag-status tag-{{item.status}}">{{item.statusText}}</text>
+          </view>
+          <view class="muted small" style="margin-top:8rpx;">{{item.followUpDate}}</view>
+          <view class="followup-remarks" wx:if="{{item.remarks}}">{{item.remarks}}</view>
+          <view class="muted small" wx:if="{{item.durationFromLast > 0}}">
+            距离上次：{{item.durationFromLast}}天
+          </view>
+        </view>
+      </view>
+      <view class="empty" wx:else>
+        <text>暂无跟进记录</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

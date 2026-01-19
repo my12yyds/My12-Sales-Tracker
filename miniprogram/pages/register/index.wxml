@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="card">
+    <view class="register-title">首次注册</view>
+    <view class="register-subtitle">请输入手机号并选择角色后进入系统</view>
+  </view>
+
+  <view class="card">
+    <view class="form-item">
+      <text class="label">姓名 *</text>
+      <input class="input" type="text" maxlength="30" placeholder="请输入姓名" value="{{name}}" bindinput="onNameInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">手机号 *</text>
+      <input class="input" type="number" maxlength="11" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">角色 *</text>
+      <view class="radio-group">
+        <label class="radio-row">
+          <radio value="2" checked="{{role === 2}}" color="#1677ff" />
+          <text>销售</text>
+        </label>
+        <label class="radio-row">
+          <radio value="1" checked="{{role === 1}}" color="#1677ff" />
+          <text>主播</text>
+        </label>
+      </view>
+    </view>
+
+    <button class="btn-primary" bindtap="onSubmit" disabled="{{submitting}}">
+      {{submitting ? '提交中...' : '注册并进入'}}
+    </button>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

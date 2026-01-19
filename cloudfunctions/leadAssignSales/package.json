@@ -1,0 +1,9 @@
+{
+  "name": "leadAssignSales",
+  "version": "1.0.0",
+  "description": "分配/添加销售到线索（支持多销售协作）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

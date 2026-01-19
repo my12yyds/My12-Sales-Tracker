@@ -1,0 +1,61 @@
+<view class="container">
+  <view class="card">
+    <view class="row-between">
+      <view class="card-title">线索跟进系统</view>
+      <button class="btn-refresh" size="mini" bindtap="onRefresh" loading="{{refreshing}}">
+        <text wx:if="{{!refreshing}}">刷新</text>
+        <text wx:else>刷新中...</text>
+      </button>
+    </view>
+    <view class="muted" style="margin-top: 12rpx;" wx:if="{{userName}}">当前账号：{{userName}}</view>
+    <view class="muted" style="margin-top: 8rpx;">角色：{{roleText}} {{groupText}}</view>
+  </view>
+
+  <view class="card" wx:if="{{role === 1}}">
+    <view class="role-actions">
+      <button class="btn-action btn-success" bindtap="goAnchorLeads">
+        <text class="btn-icon">📝</text>
+        <text class="btn-text">线索管理</text>
+        <text class="btn-desc">录入/查看线索</text>
+      </button>
+      <button class="btn-action btn-primary" bindtap="goProfile">
+        <text class="btn-icon">👤</text>
+        <text class="btn-text">个人中心</text>
+        <text class="btn-desc">账号信息</text>
+      </button>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{role === 2}}">
+    <view class="role-actions">
+      <button class="btn-action btn-success" bindtap="goSalesLeads">
+        <text class="btn-icon">📋</text>
+        <text class="btn-text">我的线索</text>
+        <text class="btn-desc">查看/跟进线索</text>
+      </button>
+      <button class="btn-action btn-primary" bindtap="goProfile">
+        <text class="btn-icon">👤</text>
+        <text class="btn-text">个人中心</text>
+        <text class="btn-desc">账号信息</text>
+      </button>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{role === 0}}">
+    <view class="role-actions">
+      <button class="btn-action btn-primary" bindtap="goAdmin">
+        <text class="btn-icon">📊</text>
+        <text class="btn-text">数据看板</text>
+        <text class="btn-desc">查看统计数据</text>
+      </button>
+      <button class="btn-action btn-primary" bindtap="goUsers">
+        <text class="btn-icon">👥</text>
+        <text class="btn-text">用户管理</text>
+        <text class="btn-desc">角色/小组设置</text>
+      </button>
+    </view>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>
+

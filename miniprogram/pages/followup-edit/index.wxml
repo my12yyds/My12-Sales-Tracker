@@ -1,0 +1,41 @@
+<!--添加跟进记录页-->
+<view class="container">
+  <view class="card">
+    <view class="form-item">
+      <text class="label">跟进日期 *</text>
+      <picker mode="date" value="{{followUpDate}}" bindchange="onDateChange">
+        <view class="picker">
+          {{followUpDate || '请选择日期'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">跟进状态 *</text>
+      <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="picker">
+          {{statusOptions[statusIndex].label}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">跟进备注</text>
+      <textarea class="textarea" placeholder="请输入跟进内容" value="{{remarks}}" bindinput="onRemarksInput" />
+    </view>
+
+    <view class="form-item" wx:if="{{lead}}">
+      <label class="checkbox-label">
+        <checkbox checked="{{advanceToNext}}" bindchange="onAdvanceChange" />
+        <text>推进到下一个进程</text>
+      </label>
+      <text class="hint" wx:if="{{lead.lastStatus}}">当前状态：{{lead.lastStatusText}}</text>
+    </view>
+
+    <button class="btn-success" bindtap="onSubmit" disabled="{{submitting}}">
+      {{submitting ? '提交中...' : '提交'}}
+    </button>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

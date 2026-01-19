@@ -1,0 +1,115 @@
+<!--管理员-数据看板页-->
+<view class="container">
+  <view class="card">
+    <view class="header-top">
+      <view>
+        <text class="title">数据看板</text>
+    <view class="muted small" wx:if="{{userName}}" style="margin-top: 8rpx;">
+      当前账号：{{userName}}
+    </view>
+    <view class="muted small" style="margin-top: 4rpx;">
+      角色：管理员
+    </view>
+      </view>
+      <button class="btn-refresh" size="mini" bindtap="onRefresh" loading="{{loading}}">
+        <text wx:if="{{!loading}}">刷新</text>
+        <text wx:else>刷新中...</text>
+      </button>
+    </view>
+    
+    <view class="admin-actions">
+      <button class="btn-action btn-primary" bindtap="goUsers">
+        <text class="btn-icon">👥</text>
+        <text class="btn-text">用户管理</text>
+        <text class="btn-desc">角色/小组设置</text>
+      </button>
+      <button class="btn-action btn-primary" bindtap="goProfile">
+        <text class="btn-icon">👤</text>
+        <text class="btn-text">个人中心</text>
+        <text class="btn-desc">账号信息</text>
+      </button>
+    </view>
+  </view>
+
+  <view class="card summary-card" wx:if="{{summary}}">
+    <text class="card-title">总体统计</text>
+    <view class="summary-row">
+      <view class="summary-item">
+        <text class="value">{{summary.totalLeads}}</text>
+        <text class="label">总线索数</text>
+      </view>
+      <view class="summary-item">
+        <text class="value">{{summary.totalFollowUpRate}}%</text>
+        <text class="label">已跟进率</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="group-stats" wx:if="{{groupStats.length > 0}}">
+    <text class="section-title">各小组统计</text>
+    <view class="card group-card" wx:for="{{groupStats}}" wx:key="groupId">
+      <view class="group-header">
+        <text class="group-name">第{{item.groupId}}组</text>
+        <text class="group-members">{{item.anchors}}主播 + {{item.sales}}销售</text>
+      </view>
+      <view class="group-summary">
+        <view class="stat-item">
+          <text class="stat-value">{{item.totalLeads}}</text>
+          <text class="stat-label">线索数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{item.followUpRate}}%</text>
+          <text class="stat-label">已跟进率</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{item.followedLeads}}</text>
+          <text class="stat-label">已跟进</text>
+        </view>
+      </view>
+      <view class="status-distribution">
+        <text class="dist-label">状态分布：</text>
+        <text class="dist-item">未联系 {{item.statusStats.NEW}}</text>
+        <text class="dist-item">已联系 {{item.statusStats.CONTACTED}}</text>
+        <text class="dist-item">已报价 {{item.statusStats.QUOTED}}</text>
+        <text class="dist-item">成交 {{item.statusStats.WON}}</text>
+        <text class="dist-item">流失 {{item.statusStats.LOST}}</text>
+      </view>
+
+      <view class="group-leads">
+        <view class="row-between" style="margin-bottom: 16rpx;">
+          <text class="leads-title">线索列表（显示最近3条）</text>
+          <button class="btn-primary" size="mini" bindtap="goGroupLeads" data-group="{{item.groupId}}">查看全部</button>
+        </view>
+        <view class="lead-row-wrapper" wx:for="{{item.leads}}" wx:for-item="leadItem" wx:key="_id">
+          <view class="lead-row" data-id="{{leadItem._id}}" bindtap="goLeadDetail">
+            <view class="lead-main">
+              <text class="lead-phone">{{leadItem.phone}}</text>
+              <text class="lead-status tag-status tag-{{leadItem.lastStatus}}">{{leadItem.lastStatusText}}</text>
+            </view>
+            <view class="lead-meta">
+              <text class="meta-text">分配：{{leadItem.assignedSalesNames || '未分配'}}</text>
+              <text class="meta-text" style="margin-left: 12rpx;">跟进：{{leadItem.followUpCount || 0}}次</text>
+            </view>
+            <view class="lead-meta">
+              <text class="meta-text">主播：{{leadItem.createdBy}}</text>
+              <text class="meta-text" style="margin-left: 12rpx;">创建：{{leadItem.createdAtDate || '—'}}</text>
+            </view>
+            <view class="lead-meta">
+              <text class="meta-text">最近：{{leadItem.lastFollowUpDate || '—'}}</text>
+            </view>
+          </view>
+          <button class="btn-danger-mini" size="mini" data-id="{{leadItem._id}}" bindtap="onDeleteLead">删除</button>
+        </view>
+        <view class="empty" wx:if="{{item.leads.length === 0}}">
+          <text>暂无线索</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

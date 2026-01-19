@@ -1,0 +1,51 @@
+<!--管理员-小组线索列表页-->
+<view class="container">
+  <view class="card">
+    <view class="row-between">
+      <text class="title">第{{groupId}}组线索列表</text>
+      <button class="btn-refresh" size="mini" bindtap="onRefresh" loading="{{loading}}">
+        <text wx:if="{{!loading}}">刷新</text>
+        <text wx:else>刷新中...</text>
+      </button>
+    </view>
+  </view>
+
+  <view class="card card-tight">
+    <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{statusIndex}}" bindchange="onStatusChange">
+      <view class="picker">
+        {{statusOptions[statusIndex].label}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="leads-list" wx:if="{{leads.length > 0}}">
+    <view class="card lead-item-wrapper" wx:for="{{leads}}" wx:key="_id">
+      <view class="lead-item-content" bindtap="onLeadTap" data-lead="{{item}}">
+        <view class="row-between">
+          <text class="phone">{{item.phone}}</text>
+          <text class="tag-status tag-{{item.lastStatus}}">{{item.lastStatusText}}</text>
+        </view>
+        <view class="lead-info">
+          <text class="info-item">创建者：{{item.createdByName || '未知'}}</text>
+          <text class="info-item">分配销售：{{item.assignedSalesNames || '未分配'}}</text>
+          <text class="info-item">跟进次数：{{item.followUpCount || 0}}</text>
+        </view>
+        <view class="lead-footer">
+          <text class="muted small">创建时间：{{item.createdAtDate || '—'}}</text>
+          <text class="muted small" style="margin-left: 20rpx;">最近跟进：{{item.lastFollowUpAt || '未跟进'}}</text>
+        </view>
+      </view>
+      <button class="btn-danger-mini" size="mini" data-id="{{item._id}}" bindtap="onDeleteLead">删除</button>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>暂无线索</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

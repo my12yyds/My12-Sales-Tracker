@@ -1,0 +1,73 @@
+<!--管理员-用户管理-->
+<view class="container">
+  <view class="header card">
+    <view>
+      <view class="title">用户管理</view>
+      <view class="muted">为账号设置角色与小组（role/groupId）</view>
+    </view>
+    <button class="btn-primary" size="mini" bindtap="reload" loading="{{loading}}">刷新</button>
+  </view>
+
+  <view class="card filters">
+    <picker mode="selector" range="{{roleOptions}}" range-key="label" value="{{roleIndex}}" bindchange="onRoleFilterChange">
+      <view class="picker">{{roleOptions[roleIndex].label}}</view>
+    </picker>
+    <picker mode="selector" range="{{groupOptions}}" range-key="label" value="{{groupIndex}}" bindchange="onGroupFilterChange">
+      <view class="picker">{{groupOptions[groupIndex].label}}</view>
+    </picker>
+  </view>
+
+  <view class="card" wx:if="{{users.length === 0 && !loading}}">
+    <view class="muted">暂无用户</view>
+  </view>
+
+  <view class="list">
+    <view class="card user" wx:for="{{users}}" wx:key="_id">
+      <view class="top">
+        <view class="name">{{item.name || '未命名'}}</view>
+        <view class="tag">role={{item.role}}</view>
+        <view class="tag" wx:if="{{item.role !== 0}}">组={{item.groupId}}</view>
+      </view>
+      <view class="muted small">userId：{{item._id}}</view>
+      <view class="muted small" wx:if="{{item.phone}}">手机号：{{item.phone}}</view>
+      <view class="muted small" wx:if="{{item.wechat}}">微信号：{{item.wechat}}</view>
+      <view class="muted small">openid：{{item.openid}}</view>
+      <view class="actions">
+        <button size="mini" bindtap="openEdit" data-user="{{item}}">编辑</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="mask" wx:if="{{editing}}">
+    <view class="modal">
+      <view class="modal-title">编辑用户</view>
+      <view class="modal-row">
+        <view class="label">昵称</view>
+        <input class="input" value="{{editDraft.name}}" bindinput="onEditName" />
+      </view>
+      <view class="modal-row">
+        <view class="label">角色</view>
+        <picker mode="selector" range="{{editRoleOptions}}" range-key="label" value="{{editDraft.roleIndex}}" bindchange="onEditRole">
+          <view class="picker">{{editRoleOptions[editDraft.roleIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="modal-row">
+        <view class="label">小组</view>
+        <picker mode="selector" range="{{editGroupOptions}}" range-key="label" value="{{editDraft.groupIndex}}" bindchange="onEditGroup">
+          <view class="picker">{{editGroupOptions[editDraft.groupIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="muted small">提示：管理员角色 groupId 必须为 0；主播/销售必须为 1~4</view>
+      <view class="modal-actions">
+        <button bindtap="closeEdit">取消</button>
+        <button class="btn-primary" bindtap="saveEdit" loading="{{saving}}" disabled="{{saving}}">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

@@ -1,0 +1,61 @@
+<!--销售-我的线索列表页-->
+<view class="container">
+  <view class="card">
+    <view class="row-between">
+      <text class="title">我的线索</text>
+      <view>
+        <button class="btn-refresh" size="mini" bindtap="onRefresh" loading="{{loading}}">
+          <text wx:if="{{!loading}}">刷新</text>
+          <text wx:else>刷新中...</text>
+        </button>
+        <button class="btn-primary" size="mini" bindtap="goProfile" style="margin-left: 12rpx;">个人中心</button>
+      </view>
+    </view>
+    <view class="muted small" wx:if="{{userName}}" style="margin-top: 12rpx;">
+      当前账号：{{userName}}
+    </view>
+    <view class="muted small" style="margin-top: 8rpx;">
+      角色：销售
+    </view>
+  </view>
+
+  <view class="card card-tight">
+    <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{statusIndex}}" bindchange="onStatusChange">
+      <view class="picker">
+        {{statusOptions[statusIndex].label}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="leads-list" wx:if="{{leads.length > 0}}">
+    <view class="card lead-item-wrapper" wx:for="{{leads}}" wx:key="_id">
+      <view class="lead-item-content" bindtap="onLeadTap" data-lead="{{item}}">
+        <view class="row-between">
+          <text class="phone">{{item.phone}}</text>
+          <text class="tag-status tag-{{item.lastStatus}}">{{item.lastStatusText}}</text>
+        </view>
+        <view class="lead-info">
+          <text class="info-item">跟进次数：{{item.followUpCount || 0}}</text>
+          <text class="info-item">协作销售：{{item.assignedSalesNames || '仅我'}}</text>
+        </view>
+        <view class="lead-footer">
+          <text class="muted small">创建：{{item.createdAtDate || '—'}}</text>
+          <text class="muted small" style="margin-left: 20rpx;">最近：{{item.lastFollowUpAt || '未跟进'}}</text>
+        </view>
+      </view>
+      <view class="lead-item-actions">
+        <button class="btn-success" size="mini" bindtap="onFollowUpTap" data-id="{{item._id}}">跟进</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <text>暂无线索</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="watermark">my12yyds</view>

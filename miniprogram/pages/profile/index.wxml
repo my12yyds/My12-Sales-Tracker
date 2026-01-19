@@ -1,0 +1,73 @@
+<view class="card">
+  <view style="font-weight:700;font-size:38rpx;">个人中心</view>
+  <view class="muted" style="margin-top:10rpx;">用于查看当前账号信息与快速退出</view>
+</view>
+
+<view class="card" wx:if="{{user}}">
+  <view class="stats" wx:if="{{stats}}">
+    <view class="stat">
+      <view class="num">{{stats.totalLeads}}</view>
+      <view class="muted">线索数</view>
+    </view>
+    <view class="stat">
+      <view class="num">{{stats.followedLeads}}</view>
+      <view class="muted">已跟进线索</view>
+    </view>
+    <view class="stat" wx:if="{{stats.myFollowUps !== undefined}}">
+      <view class="num">{{stats.myFollowUps}}</view>
+      <view class="muted">我的跟进数</view>
+    </view>
+    <view class="stat" wx:if="{{stats.totalFollowUps !== undefined}}">
+      <view class="num">{{stats.totalFollowUps}}</view>
+      <view class="muted">总跟进数</view>
+    </view>
+  </view>
+
+  <view class="row">
+    <view class="label">身份</view>
+    <view class="value">{{roleText}}</view>
+  </view>
+  <view class="row" wx:if="{{user.role !== 0}}">
+    <view class="label">小组</view>
+    <view class="value">第{{user.groupId}}组</view>
+  </view>
+  <view class="row">
+    <view class="label">昵称/姓名</view>
+    <view class="value">
+      <input class="input" placeholder="请输入昵称/姓名" value="{{nameDraft}}" bindinput="onNameInput" />
+      <view class="muted" style="margin-top:10rpx;">保存后会同步到数据库</view>
+    </view>
+  </view>
+  <view class="row">
+    <view class="label">手机号</view>
+    <view class="value">
+      <input class="input" type="number" placeholder="请输入手机号" value="{{phoneDraft}}" bindinput="onPhoneInput" />
+    </view>
+  </view>
+  <view class="row">
+    <view class="label">微信号</view>
+    <view class="value">
+      <input class="input" placeholder="请输入微信号" value="{{wechatDraft}}" bindinput="onWechatInput" />
+    </view>
+  </view>
+
+  <view style="margin-top:14rpx; padding: 0 20rpx 10rpx;">
+    <button class="btn-primary" size="default" bindtap="saveProfile" loading="{{savingName}}" disabled="{{savingName}}">保存个人信息</button>
+  </view>
+  <view class="row">
+    <view class="label">用户ID</view>
+    <view class="value mono">{{user.userId || user._id}}</view>
+  </view>
+  <view class="row">
+    <view class="label">OpenID</view>
+    <view class="value mono">{{user.openid}}</view>
+  </view>
+</view>
+
+<view class="card">
+  <button class="btn-primary" bindtap="goHome">返回首页</button>
+  <view style="height:16rpx;"></view>
+  <button class="btn-danger" bindtap="logout">退出登录</button>
+</view>
+
+<view class="watermark">my12yyds</view>

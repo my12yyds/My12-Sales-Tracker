@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/register/index",
+    "pages/home/index",
+    "pages/profile/index",
+    "pages/admin/users/index",
+    "pages/admin/dashboard/index",
+    "pages/admin/group-leads/index",
+    "pages/anchor/leads/index",
+    "pages/anchor/lead-edit/index",
+    "pages/sales/leads/index",
+    "pages/lead-detail/index",
+    "pages/followup-edit/index",
+    "pages/user-detail/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "线索跟进",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7fb",
+    "enablePullDownRefresh": true
+  }
+}
+

@@ -32,7 +32,7 @@ exports.main = async (event = {}, context) => {
       return { success: false, message: '无权限查看小组成员' };
     }
 
-    if (![1, 2, 3, 4].includes(groupId)) {
+    if (!Number.isSafeInteger(groupId) || groupId < 1) {
       return { success: false, message: '小组无效，请先联系管理员分配小组' };
     }
 

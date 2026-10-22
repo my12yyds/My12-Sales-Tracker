@@ -45,7 +45,7 @@ exports.main = async (event = {}, context) => {
     if (role !== 1) {
       return { success: false, message: '只有主播可以批量录入线索' };
     }
-    if (![1, 2, 3, 4].includes(groupId)) {
+    if (!Number.isSafeInteger(groupId) || groupId < 1) {
       return { success: false, message: '请先联系管理员分配小组' };
     }
 

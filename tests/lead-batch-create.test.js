@@ -125,6 +125,26 @@ test('batch rejects empty input, oversized batches and non-anchor users', async 
   assert.equal(asSales.store.leads.length, 0);
 });
 
+test('batch create works for teams above four and rejects unassigned groups', async () => {
+  const { main, store } = load({
+    users: [
+      { _id: 'manager', role: 1, groupId: 42, name: '负责人42' },
+      { _id: 's42', role: 2, groupId: 42, name: '销售42' }
+    ],
+    leads: []
+  }, 'openid-manager');
+  const result = await main({ phones: ['13800000051', '13800000052'] });
+  assert.equal(result.success, true);
+  assert.equal(result.data.createdCount, 2);
+  assert.ok(store.leads.every(lead => lead.groupId === 42 && lead.status === 'NEW'));
+
+  const unassigned = load({ users: [{ _id: 'manager', role: 1, groupId: 0, name: '未分组' }], leads: [] }, 'openid-manager');
+  const denied = await unassigned.main({ phones: ['13800000061'] });
+  assert.equal(denied.success, false);
+  assert.match(denied.message, /分配小组/);
+  assert.equal(unassigned.store.leads.length, 0);
+});
+
 test('a batch that is entirely duplicates creates nothing but stays successful', async () => {
   const { main, store } = load({
     users,

@@ -4,6 +4,6 @@
   "description": "删除线索（负责人/管理员）",
   "main": "index.js",
   "dependencies": {
-    "wx-server-sdk": "~2.6.3"
+    "wx-server-sdk": "~4.0.2"
   }
 }

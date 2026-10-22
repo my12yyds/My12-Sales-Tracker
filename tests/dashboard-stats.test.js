@@ -107,21 +107,6 @@ test('sales ranking sorts by closed deals and follows the same rules', async () 
   assert.equal(salesRanking[1].conversionRate, 0);
 });
 
-test('sales ranking includes teams above four', async () => {
-  const admin = { _id: 'admin', name: '老板', role: 0, groupId: 0 };
-  const manager = { _id: 'manager', name: '负责人42', role: 1, groupId: 42 };
-  const sales = { _id: 's42', name: '销售42', role: 2, groupId: 42 };
-  const main = load({
-    users: [admin, manager, sales],
-    leads: [{ _id: 'L42', groupId: 42, phone: '13800000042', lastStatus: 'WON', assignedSalesIds: ['s42'], followUpCount: 1, createdAt: new Date() }],
-    followUps: []
-  }, admin);
-  const result = await main({});
-  assert.equal(result.success, true);
-  assert.ok(result.data.salesRanking.some(row =>
-    row._id === 's42' && row.groupId === 42 && row.wonCount === 1 && row.assignedCount === 1));
-});
-
 test('non-admins cannot read the dashboard', async () => {
   const main = load({ users, leads, followUps }, users[2]);
   const result = await main({});

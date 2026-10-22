@@ -95,7 +95,7 @@ Page({
           lead: leadWithTime,
           canAddFollowUp,
           canDelete,
-          canManageAssignment: isAnchor && lead.groupId >= 1,
+          canManageAssignment: isAnchor && lead.groupId >= 1 && lead.groupId <= 4,
           dueText: due.text,
           dueLevel: due.level,
           user

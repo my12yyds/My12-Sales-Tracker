@@ -46,13 +46,18 @@ Page({
       if (res.result.success) {
         const lead = res.result.data.list.find(l => l._id === this.data.leadId);
         if (lead) {
-          this.setData({ 
+          // 默认选中线索当前状态：补录跟进时若状态未变化，
+          // 直接提交也不会把线索摘要误重置为「待处理」
+          const currentStatus = lead.lastStatus || lead.status || 'NEW';
+          const currentIndex = this.data.statusOptions.findIndex(opt => opt.value === currentStatus);
+          this.setData({
             lead: {
               ...lead,
               lastStatusText: getStatusText(lead.lastStatus)
             },
             // 已有计划时带出来，方便顺延
-            nextFollowUpDate: this.data.nextFollowUpDate || chinaDay(lead.nextFollowUpAt)
+            nextFollowUpDate: this.data.nextFollowUpDate || chinaDay(lead.nextFollowUpAt),
+            ...(currentIndex >= 0 ? { statusIndex: currentIndex } : {})
           });
         }
       }

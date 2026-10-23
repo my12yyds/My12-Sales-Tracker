@@ -191,8 +191,9 @@ exports.main = async (event, context) => {
     }
 
     // 销售业绩排行：分配量、跟进量、成交、转化率
+    // 团队编号为正整数，不限定为 1~4，避免团队 5 以上的成员被漏统计
     const salesRanking = allUsers
-      .filter(u => u.role === 2 && u.groupId >= 1 && u.groupId <= 4)
+      .filter(u => u.role === 2 && Number.isSafeInteger(u.groupId) && u.groupId >= 1)
       .map(user => {
         const assigned = allLeads.filter(lead =>
           Array.isArray(lead.assignedSalesIds) && lead.assignedSalesIds.includes(user._id));

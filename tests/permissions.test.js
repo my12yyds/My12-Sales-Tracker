@@ -177,6 +177,26 @@ test('invalid team assignments are rejected without updating users', async () =>
   }
 });
 
+test('group members works for teams numbered above four and rejects invalid teams', async () => {
+  const { main, calls } = load('groupMembers', { _id: 'manager', role: 1, groupId: 42 }, {},
+    { members: [{ _id: 's42', name: '销售42' }] });
+  const ok = await main({});
+  assert.equal(ok.success, true);
+  assert.equal(ok.data.groupId, 42);
+  assert.equal(ok.data.list.length, 1);
+  const membersWhere = calls
+    .filter(call => call.collection === 'users')
+    .map(call => call.where)
+    .find(where => where && where.role === 2);
+  assert.equal(membersWhere.groupId, 42);
+
+  // 未分组负责人与非法编号都拒绝
+  for (const groupId of [0, -1, 1.5, '42', Number.MAX_SAFE_INTEGER + 1]) {
+    const invalid = load('groupMembers', { _id: 'manager', role: 1, groupId });
+    assert.equal((await invalid.main({})).success, false, `groupId=${groupId} 应被拒绝`);
+  }
+});
+
 test('public role and workflow labels use general-purpose vocabulary', () => {
   const { roleName } = require('../miniprogram/utils/auth');
   const { getStatusText } = require('../miniprogram/utils/status');

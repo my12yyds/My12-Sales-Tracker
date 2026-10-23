@@ -107,6 +107,36 @@ test('sales ranking sorts by closed deals and follows the same rules', async () 
   assert.equal(salesRanking[1].conversionRate, 0);
 });
 
+test('sales ranking includes teams numbered above four', async () => {
+  const admin = { _id: 'admin', name: '老板', role: 0, groupId: 0 };
+  const manager = { _id: 'manager', name: '负责人42', role: 1, groupId: 42 };
+  const sales = { _id: 's42', name: '销售42', role: 2, groupId: 42 };
+  const main = load({
+    users: [admin, manager, sales],
+    leads: [{
+      _id: 'L42', groupId: 42, phone: '13800000042', lastStatus: 'WON',
+      assignedSalesIds: ['s42'], followUpCount: 1, createdAt: new Date()
+    }],
+    followUps: []
+  }, admin);
+  const result = await main({});
+  assert.equal(result.success, true);
+  const row = result.data.salesRanking.find(item => item._id === 's42');
+  assert.ok(row, '团队 42 的成员应出现在业绩排行中');
+  assert.equal(row.groupId, 42);
+  assert.equal(row.wonCount, 1);
+  assert.equal(row.assignedCount, 1);
+});
+
+test('sales ranking still excludes unassigned members', async () => {
+  const admin = { _id: 'admin', name: '老板', role: 0, groupId: 0 };
+  const unassigned = { _id: 's0', name: '未分组', role: 2, groupId: 0 };
+  const main = load({ users: [admin, unassigned], leads: [], followUps: [] }, admin);
+  const result = await main({});
+  assert.equal(result.success, true);
+  assert.equal(result.data.salesRanking.length, 0);
+});
+
 test('non-admins cannot read the dashboard', async () => {
   const main = load({ users, leads, followUps }, users[2]);
   const result = await main({});

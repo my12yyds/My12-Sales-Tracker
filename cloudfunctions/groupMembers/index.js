@@ -32,7 +32,8 @@ exports.main = async (event = {}, context) => {
       return { success: false, message: '无权限查看小组成员' };
     }
 
-    if (![1, 2, 3, 4].includes(groupId)) {
+    // 团队编号为正整数，不限定为 1~4；未分组（0/缺失）仍然拒绝
+    if (!Number.isSafeInteger(groupId) || groupId < 1) {
       return { success: false, message: '小组无效，请先联系管理员分配小组' };
     }
 

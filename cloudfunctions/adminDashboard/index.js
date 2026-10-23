@@ -192,7 +192,7 @@ exports.main = async (event, context) => {
 
     // 销售业绩排行：分配量、跟进量、成交、转化率
     const salesRanking = allUsers
-      .filter(u => u.role === 2 && u.groupId >= 1)
+      .filter(u => u.role === 2 && u.groupId >= 1 && u.groupId <= 4)
       .map(user => {
         const assigned = allLeads.filter(lead =>
           Array.isArray(lead.assignedSalesIds) && lead.assignedSalesIds.includes(user._id));

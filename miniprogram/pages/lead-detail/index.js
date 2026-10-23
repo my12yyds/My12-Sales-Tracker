@@ -95,7 +95,8 @@ Page({
           lead: leadWithTime,
           canAddFollowUp,
           canDelete,
-          canManageAssignment: isAnchor && lead.groupId >= 1 && lead.groupId <= 4,
+          // 团队编号为正整数，不限定为 1~4
+          canManageAssignment: isAnchor && Number.isSafeInteger(lead.groupId) && lead.groupId >= 1,
           dueText: due.text,
           dueLevel: due.level,
           user

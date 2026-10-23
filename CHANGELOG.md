@@ -1,5 +1,13 @@
 # 更新日志
 
+## 未发布
+
+### 修复
+
+- 移除 4 处遗留的「四组」硬编码，团队编号 ≥ 5 时不再失效：`groupMembers` 成员列表、`leadCreateBatch` 批量录入、`adminDashboard` 销售业绩排行、`lead-detail` 协作销售管理入口。统一改为与 `adminUserUpdate` 一致的正安全整数校验（`Number.isSafeInteger(groupId) && groupId >= 1`），未分组（groupId 0）行为不变。
+- 同步更正 `安装指导.md`、`docs/MAINTENANCE.md`、`docs/NEXT_FOLLOWUP_AND_COLLAB.md` 与 v0.1.0 设计稿中「支持 4 个小组 / groupId 1~4」的描述。
+- 新增 4 项回归测试覆盖团队编号 42 与未分组场景（共 76 项）。
+
 ## 0.2.0 — 2026-10-22 · 通用版源码预发布
 
 - 产品改为通用客户与事项跟进，使用管理员、负责人、成员和通用流程文案。

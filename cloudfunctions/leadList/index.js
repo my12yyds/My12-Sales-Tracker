@@ -50,7 +50,11 @@ exports.main = async (event = {}, context) => {
       query.groupId = groupId;
     } else if (role === 0) {
       // 管理员：所有线索（可选：按组筛选）
+      // 0/未传表示不筛选；传入时必须是正整数，避免字符串型 groupId 静默查不到数据
       if (event.groupId) {
+        if (!Number.isSafeInteger(event.groupId) || event.groupId < 1) {
+          return { success: false, message: '团队筛选无效：需为正整数' };
+        }
         query.groupId = event.groupId;
       }
     } else {

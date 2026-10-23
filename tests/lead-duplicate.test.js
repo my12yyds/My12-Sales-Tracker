@@ -73,6 +73,30 @@ test('a different phone is created normally and trims the input', async () => {
   assert.equal(added[0].data.lastStatus, 'NEW');
 });
 
+test('name-only leads are not treated as duplicates of each other', async () => {
+  // 组内已有仅名称、无电话的线索，新建同样「只填名称」的客户应成功
+  const existing = [
+    { _id: 'a', groupId: 2, phone: '', customerName: '客户甲' },
+    { _id: 'b', groupId: 2, phone: '', customerName: '客户乙' }
+  ];
+  const { main, added } = load(existing, anchor);
+  const result = await main({ customerName: '客户丙' });
+  assert.equal(result.success, true);
+  assert.equal(result.duplicate, undefined);
+  assert.equal(added.length, 1);
+  assert.equal(added[0].data.customerName, '客户丙');
+  assert.equal(added[0].data.phone, '');
+});
+
+test('name-only lead still does not bypass phone deduplication', async () => {
+  // 有电话时查重照旧生效
+  const { main, added } = load([{ _id: 'old', groupId: 2, phone: '13800000001' }], anchor);
+  const result = await main({ phone: '13800000001', customerName: '同名客户' });
+  assert.equal(result.success, false);
+  assert.equal(result.duplicate, true);
+  assert.equal(added.length, 0);
+});
+
 test('non-boolean force and non-anchor roles are rejected', async () => {
   const { main, added } = load([], anchor);
   assert.equal((await main({ phone: '13800000002', assignedSalesIds: ['sales'], force: 'yes' })).success, false);

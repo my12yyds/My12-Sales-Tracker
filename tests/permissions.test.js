@@ -177,6 +177,22 @@ test('invalid team assignments are rejected without updating users', async () =>
   }
 });
 
+test('admin team filter rejects non-positive-integer group ids', async () => {
+  for (const groupId of ['5', 1.5, -1, Number.MAX_SAFE_INTEGER + 1]) {
+    const { main, calls } = load('leadList', { _id: 'admin', role: 0 });
+    const result = await main({ groupId });
+    assert.equal(result.success, false, `groupId=${JSON.stringify(groupId)} 应被拒绝`);
+    assert.match(result.message, /团队筛选/);
+    assert.equal(calls.some(call => call.collection === 'leads'), false);
+  }
+
+  // 正整数正常筛选；0/未传表示不筛选，保持旧行为
+  const ok = load('leadList', { _id: 'admin', role: 0 });
+  assert.equal((await ok.main({ groupId: 42 })).success, true);
+  const all = load('leadList', { _id: 'admin', role: 0 });
+  assert.equal((await all.main({})).success, true);
+});
+
 test('public role and workflow labels use general-purpose vocabulary', () => {
   const { roleName } = require('../miniprogram/utils/auth');
   const { getStatusText } = require('../miniprogram/utils/status');

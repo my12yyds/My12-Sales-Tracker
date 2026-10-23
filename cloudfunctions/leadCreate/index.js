@@ -45,7 +45,8 @@ exports.main = async (event, context) => {
     const normalizedPhone = phone.trim();
 
     // 4. 同组重复电话检测：同一条客户电话在同一小组只保留一条
-    if (event.force !== true) {
+    // 仅名称、无电话的线索不参与查重，否则第二条起会被误判为重复
+    if (event.force !== true && normalizedPhone) {
       const duplicateRes = await db.collection('leads')
         .where({ groupId, phone: normalizedPhone })
         .limit(1)

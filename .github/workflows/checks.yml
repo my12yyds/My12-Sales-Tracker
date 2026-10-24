@@ -20,3 +20,4 @@ jobs:
       - run: npm test
       - run: npm run check:syntax
       - run: npm run check:public
+      - run: npm run check:docs

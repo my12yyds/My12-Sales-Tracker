@@ -1,0 +1,82 @@
+<!--API 实验室：教学演示页，不在导航里-->
+<view class="container">
+  <view class="header">
+    <text class="title">API 实验室</text>
+    <view class="subtitle">点按钮就能看到真实返回。这个页面不挂导航，通过「添加编译模式」打开。</view>
+  </view>
+
+  <!--环境信息-->
+  <view class="card">
+    <view class="row-between">
+      <text class="lab-card-title">运行环境</text>
+      <button size="mini" bindtap="readEnv">刷新</button>
+    </view>
+    <view class="lab-kv"><text class="muted small">基础库版本</text><text class="small">{{sdkVersion}}</text></view>
+    <view class="lab-kv"><text class="muted small">平台 / 品牌</text><text class="small">{{platform}} / {{brand}}</text></view>
+    <view class="lab-kv"><text class="muted small">网络类型</text><text class="small">{{network}}</text></view>
+    <view class="lab-kv"><text class="muted small">页面栈层级</text><text class="small">{{stackDepth}}</text></view>
+    <view class="lab-hint">页面栈：{{stackRoutes}}</view>
+  </view>
+
+  <!--交互反馈-->
+  <view class="card">
+    <text class="lab-card-title">交互反馈</text>
+    <view class="lab-hint">对应教程第 05 章。注意 loading 与 toast 抢同一块浮层。</view>
+    <view class="lab-btn-row">
+      <button size="mini" class="btn-success" bindtap="toastSuccess">success</button>
+      <button size="mini" bindtap="toastNone">none（长文案）</button>
+    </view>
+    <view class="lab-btn-row">
+      <button size="mini" bindtap="loadingDemo">loading 1.5 秒</button>
+      <button size="mini" bindtap="modalDemo">showModal</button>
+    </view>
+    <view class="lab-btn-row">
+      <button size="mini" bindtap="actionSheetDemo">showActionSheet</button>
+    </view>
+  </view>
+
+  <!--本地存储-->
+  <view class="card">
+    <text class="lab-card-title">本地存储</text>
+    <view class="lab-hint">对应教程第 07 章。读一个不存在的 key 会返回空字符串，不是 undefined。</view>
+    <view class="lab-btn-row">
+      <button size="mini" class="btn-primary" bindtap="storageWrite">写入</button>
+      <button size="mini" bindtap="storageRead">读取</button>
+      <button size="mini" bindtap="storageRemove">删除</button>
+    </view>
+    <view class="lab-hint">当前 api-lab 前缀的 key：{{storageKeys.length ? storageKeys : '（无）'}}</view>
+  </view>
+
+  <!--设备能力-->
+  <view class="card">
+    <text class="lab-card-title">设备能力</text>
+    <view class="lab-hint">对应教程第 08 章。拨号需要在源码里填号码，默认不会真拨。</view>
+    <view class="lab-btn-row">
+      <button size="mini" bindtap="copyDemo">复制到剪贴板</button>
+      <button size="mini" bindtap="callDemo">拨号（需先填号码）</button>
+    </view>
+  </view>
+
+  <!--云能力-->
+  <view class="card">
+    <text class="lab-card-title">云能力</text>
+    <view class="lab-hint">对应教程第 02、03 章。重点看 callFunction 返回值的分层。</view>
+    <view class="lab-btn-row">
+      <button size="mini" class="btn-primary" bindtap="callCloud" disabled="{{busy}}">调用 authLogin</button>
+      <button size="mini" bindtap="queryDatabase" disabled="{{busy}}">前端直连查 users</button>
+    </view>
+  </view>
+
+  <!--输出面板-->
+  <view class="card" wx:if="{{output}}">
+    <view class="row-between">
+      <text class="lab-card-title">{{outputTitle}}</text>
+      <button size="mini" bindtap="clearOutput">清空</button>
+    </view>
+    <view class="lab-output"><text class="small" user-select="{{true}}">{{output}}</text></view>
+  </view>
+
+  <view class="muted small lab-foot">
+    本页代码见 miniprogram/pages/api-lab/index.js，每处都标了「教学点」注释。
+  </view>
+</view>

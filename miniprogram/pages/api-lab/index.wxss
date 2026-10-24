@@ -1,0 +1,59 @@
+/* API 实验室：仅本页使用，不污染全局样式 */
+
+.lab-card-title {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.lab-hint {
+  margin-top: 10rpx;
+  color: #6b7280;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+
+.lab-kv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rpx 0;
+  border-bottom: 1rpx solid #f1f2f4;
+}
+
+.lab-kv:last-of-type {
+  border-bottom: none;
+}
+
+.lab-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.lab-btn-row button {
+  margin: 0;
+}
+
+.lab-output {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: #0f172a;
+  border-radius: 12rpx;
+  max-height: 560rpx;
+  overflow: auto;
+}
+
+.lab-output text {
+  color: #e2e8f0;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 22rpx;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.lab-foot {
+  margin: 8rpx 0 40rpx;
+  text-align: center;
+}

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node --test tests/*.test.js",
     "check:syntax": "node scripts/check-syntax.js",
-    "check:public": "node scripts/check-public-config.js"
+    "check:public": "node scripts/check-public-config.js",
+    "check:docs": "node scripts/check-docs.js",
+    "check": "npm test && npm run check:syntax && npm run check:public && npm run check:docs"
   },
   "engines": {"node": ">=20"}
 }

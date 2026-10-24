@@ -1,13 +1,43 @@
-# 通用客户与事项跟进系统（微信云开发）
+# 通用客户与事项跟进系统（微信云开发）· 教学版
 
 [![Regression checks](https://github.com/my12yyds/My12-Sales-Tracker/actions/workflows/checks.yml/badge.svg)](https://github.com/my12yyds/My12-Sales-Tracker/actions/workflows/checks.yml)
 [![CodeQL](https://github.com/my12yyds/My12-Sales-Tracker/actions/workflows/codeql.yml/badge.svg)](https://github.com/my12yyds/My12-Sales-Tracker/actions/workflows/codeql.yml)
+
+这是一个**能直接用**的客户与事项跟进系统，也是一份**按 API 组织的微信小程序教程**。
+
+项目里每个 `wx.*` 和 `db.*` 调用都能在 [docs/tutorial](docs/tutorial/00-导读与课程地图.md) 里找到对应讲解：它是干什么的、参数怎么传、返回值什么形状、什么情况下会坑你。所有例子都标注了文件与行号，可以边读边跳过去看。
 
 适用于客户服务、商务合作、项目事项和团队协作。支持单人负责人及多团队使用，不再限定主播、销售或固定四组。仓库名与部分内部字段保留，以兼容已有用户和数据库。
 
 **项目制作人：** [my12yyds](https://github.com/my12yyds)、[Lyon-heng](https://github.com/Lyon-heng)。[制作人名单](AUTHORS.md)
 
 当前源码版本：**v0.2.0 通用版（预发布）**。[完整版本下载](https://github.com/my12yyds/My12-Sales-Tracker/releases/tag/v0.2.0) · [更新日志](CHANGELOG.md)。v0.1.0 保留为原有场景的历史源码包。
+
+## 教学版：跟着源码学小程序 API
+
+[**→ 从导读页开始读**](docs/tutorial/00-导读与课程地图.md)
+
+12 章，按「地基 → 交互 → 界面与权限」三段递进，每章结尾有动手练习：
+
+| 篇 | 章节 | 覆盖的 API |
+| --- | --- | --- |
+| 地基 | [01 项目结构与生命周期](docs/tutorial/01-项目结构与生命周期.md) | `App()`、`Page()`、`setData`、`onPullDownRefresh`、`onReachBottom` |
+| | [02 云开发接入与调用云函数](docs/tutorial/02-云开发接入与调用云函数.md) | `wx.cloud.init`、`wx.cloud.callFunction`、`cloud.getWXContext` |
+| | [03 云数据库 CRUD](docs/tutorial/03-云数据库CRUD.md) | `db.collection`、`.add/.get/.update/.remove`、`.field` |
+| | [04 查询指令与分页上限](docs/tutorial/04-查询指令与分页上限.md) | `db.command` 全套、`db.RegExp`、分页与单次上限 |
+| 交互 | [05 交互反馈 API](docs/tutorial/05-交互反馈API.md) | `showToast`、`showLoading`、`showModal`、`showActionSheet` |
+| | [06 页面路由与参数传递](docs/tutorial/06-页面路由与参数传递.md) | `navigateTo`、`redirectTo`、`reLaunch`、`navigateBack` |
+| | [07 本地存储与登录缓存](docs/tutorial/07-本地存储与登录缓存.md) | `setStorageSync`、`getStorageSync`、缓存清洗 |
+| | [08 设备能力与文件导出](docs/tutorial/08-设备能力与文件导出.md) | `makePhoneCall`、`setClipboardData`、`getFileSystemManager`、`shareFileMessage` |
+| 界面与权限 | [09 WXML 数据绑定与事件](docs/tutorial/09-WXML数据绑定与事件.md) | `wx:if`、`wx:for`、`wx:key`、`bindtap`、`data-*` |
+| | [10 表单组件与选择器](docs/tutorial/10-表单组件与选择器.md) | `picker`、`input`、`textarea`、`switch`、`checkbox` |
+| | [11 权限模型与鉴权链路](docs/tutorial/11-权限模型与鉴权链路.md) | `getWXContext` 鉴权链、对象级权限、沙箱测试 |
+| | [12 踩坑清单与调试](docs/tutorial/12-踩坑清单与调试.md) | 10 个真实坑 + 调试手段 + 自查清单 |
+
+导读页里还有一张完整的 [API 索引表](docs/tutorial/00-导读与课程地图.md#api-索引表)，可以直接按 API 反查它在哪个文件被用到。
+
+**只学不跑也可以**：教程里所有代码片段都标注了位置，`npm test` 不连真实云环境也能跑（用 `vm` 沙箱伪造了 SDK）。
+
 
 ## 主要功能
 
@@ -42,8 +72,11 @@ npm run check:public
 
 测试模拟云 SDK，不访问真实数据库。通过测试不代表已完成微信云端、编译或真机验收。
 
+当前 75 项测试覆盖云函数的权限校验、查询条件构造、查重、分页与日期边界。教程里每章的「练习」都可以用这套测试验证有没有改坏东西。
+
 ## 文档与协作
 
+- **教学教程**：[导读与课程地图](docs/tutorial/00-导读与课程地图.md)（12 章，按 API 组织）
 - [通用化设置、兼容协议及升级说明](docs/GENERAL_PURPOSE.md)
 - [搜索、导出等工作台功能](docs/LEAD_WORKSPACE.md)
 - [公开配置与部署边界](docs/PUBLIC_CONFIGURATION.md)
